@@ -65,12 +65,16 @@ resource "aws_s3_bucket_notification" "s3_to_sqs_notification" {
   ]
 }
 
+module "aws_ecr_repository" {
+  source = "./modules/aws_ecr"
+  for_each = toset(var.repository_names)
+  name = each.value
+}
+
 module "security_group_sqs_polling" {
   source = "./modules/aws_security_groups"
   name=var.name
   description=var.description
-  vpc_id=var.vpc_id
-
   ingress_rules = var.ingress_rules
 }
 
@@ -79,5 +83,6 @@ module "ec2_instance" {
   ami_value = var.ami_value
   instance_type_value = var.instance_type_value
   key_value = var.key_value
-  security_group_id = module.security_group_sqs_polling.security_group_id
+  # security_group_id = module.security_group_sqs_polling.security_group_id
 }
+

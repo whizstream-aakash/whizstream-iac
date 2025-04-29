@@ -43,7 +43,6 @@ variable "receive_wait_time_seconds"{
 //security_groups
 variable "name" {}
 variable "description" {}
-variable "vpc_id" {}
 variable "ingress_rules" {
   description = "List of ingress rules"
   type = list(object({
@@ -53,8 +52,12 @@ variable "ingress_rules" {
     cidr_blocks = list(string)
   }))
 }
+
 //ec2
 variable "ami_value" {}
 variable "instance_type_value" {}
 variable "key_value"{}
+
+//ecr
+variable repository_names {}
 

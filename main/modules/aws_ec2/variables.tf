@@ -3,4 +3,4 @@
 variable "ami_value" {}
 variable "instance_type_value" {}
 variable "key_value" {}
-variable "security_group_id" {}
+# variable "security_group_id" {}

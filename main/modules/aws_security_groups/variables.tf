@@ -1,6 +1,5 @@
 variable "name" {}
 variable "description" {}
-variable "vpc_id" {}
 
 //ingress
 variable "ingress_rules" {
@@ -12,9 +11,3 @@ variable "ingress_rules" {
     cidr_blocks = list(string)
   }))
 }
-
-# //egress
-# variable "egress_from_port"{}
-# variable "egress_to_port"{}
-# variable "egress_protocol"{}
-# variable "egress_cidr_blocks"{ type = list(string)}

@@ -5,7 +5,6 @@ provider "aws" {
 resource "aws_security_group" "sg_grp" {
   name        = var.name
   description = var.description
-  vpc_id = var.vpc_id
   
    dynamic "ingress" {
     for_each = var.ingress_rules
