@@ -9,7 +9,7 @@ WORKSPACE="${1:-dev}"
 
 # Absolute paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MAIN_DIR="$(cd "$SCRIPT_DIR/../main" && pwd)"
+MAIN_DIR="$(cd "$SCRIPT_DIR/../../main" && pwd)"
 BOOTSTRAP_DIR="$(cd "$SCRIPT_DIR/../bootstrap" && pwd)"
 
 # Error handling function
