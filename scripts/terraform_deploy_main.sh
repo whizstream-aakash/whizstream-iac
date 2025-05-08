@@ -43,7 +43,7 @@ destroy_infra() {
   echo "✅ Cleanup completed."
 }
 
-# Main Deployment
+# Main Deploymentscripts/terraform_deploy_main.sh
 echo "📦 Moving to main folder"
 cd "$MAIN_DIR"
 
