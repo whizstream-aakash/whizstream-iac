@@ -5,6 +5,8 @@ resource "aws_ecr_repository" "sqs_processor_repo" {
     scan_on_push = true
   }
 
+  force_delete = true
+
   image_tag_mutability = "MUTABLE"
 
   tags = {
