@@ -44,7 +44,7 @@ destroy_infra() {
 }
 
 # Main Deploymentscripts/terraform_deploy_main.sh
-echo "📦 Moving to main folder"
+echo "📦 Moving to main folder: $MAIN_DIR"
 cd "$MAIN_DIR"
 
 echo "🚀 Initializing Terraform in main folder"
