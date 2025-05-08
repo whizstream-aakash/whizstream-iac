@@ -10,8 +10,8 @@ WORKSPACE="${1:-dev}"
 # Absolute paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "$(pwd)"
-MAIN_DIR="$(cd "$(dirname "../${BASH_SOURCE[0]}")/main" && pwd)"
-BOOTSTRAP_DIR="$(cd "$(dirname "../${BASH_SOURCE[0]}")/bootstrap" && pwd)"
+MAIN_DIR="$(cd "$(pwd)/main")"
+BOOTSTRAP_DIR="$(cd "$(pwd)/bootstrap")"
 
 # Error handling function
 handle_error() {
