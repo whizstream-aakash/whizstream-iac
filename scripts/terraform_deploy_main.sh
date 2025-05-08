@@ -65,10 +65,10 @@ echo "🔍 Validating Terraform Configuration..."
 terraform validate
 
 echo "📄 Planning Terraform changes..."
-terraform plan -var-file="../main/terraform.tfvars" -out=tfplan
+terraform plan -var-file="$MAIN_DIR/terraform.tfvars" -out=tfplan
 terraform show tfplan
 
 echo "🚀 Applying Terraform changes..."
-terraform apply -auto-approve -input=false -tfplan
+terraform apply -var-file="$MAIN_DIR/terraform.tfvars" -auto-approve -tfplan
 
 echo "✅ Terraform apply completed successfully in '$WORKSPACE' workspace."
