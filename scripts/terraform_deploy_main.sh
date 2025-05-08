@@ -50,6 +50,7 @@ cd "$MAIN_DIR"
 echo "🚀 Initializing Terraform in main folder"
 terraform init
 
+# Ensure workspace exists or create it
 if terraform workspace list | grep -qw "$WORKSPACE"; then
     echo "✅ Workspace '$WORKSPACE' already exists"
 else
@@ -64,9 +65,10 @@ echo "🔍 Validating Terraform Configuration..."
 terraform validate
 
 echo "📄 Planning Terraform changes..."
-terraform plan
+terraform plan -var-file="../main/terraform.tfvars" -out=tfplan
+terraform show tfplan
 
 echo "🚀 Applying Terraform changes..."
-terraform apply -auto-approve
+terraform apply -auto-approve -input=false -tfplan
 
 echo "✅ Terraform apply completed successfully in '$WORKSPACE' workspace."
