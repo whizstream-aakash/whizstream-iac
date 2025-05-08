@@ -1,21 +1,55 @@
 #!/bin/bash
 
-set -euo pipefail  # Exit on errors, use of unset variables, or failed pipeline
-trap 'echo "❌ Error at line $LINENO. Exiting." >&2' ERR
+set -euo pipefail
+trap 'handle_error $LINENO' ERR
+trap 'handle_cancel' SIGINT SIGTERM
 
 # Accept workspace name as a parameter, default to "dev"
 WORKSPACE="${1:-dev}"
 
-# Get the absolute path to the directory containing this script
+# Absolute paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "📦 Moving to main folder"
-cd "$SCRIPT_DIR/../main"
+MAIN_DIR="$SCRIPT_DIR/../main"
+BOOTSTRAP_DIR="$SCRIPT_DIR/../bootstrap"
 
-# Initialize Terraform
+# Error handling function
+handle_error() {
+  echo "❌ Error at line $1. Initiating cleanup..." >&2
+  destroy_infra
+  exit 1
+}
+
+# Cancellation handling
+handle_cancel() {
+  echo "🛑 Workflow was canceled. Initiating cleanup..."
+  destroy_infra
+  exit 1
+}
+
+# Destroy function (destroys in reverse order: main → bootstrap)
+destroy_infra() {
+  echo "🧨 Destroying infrastructure in 'main'..."
+  cd "$MAIN_DIR"
+  terraform init -input=false
+  terraform workspace select "$WORKSPACE" || terraform workspace new "$WORKSPACE"
+  terraform destroy -auto-approve || echo "⚠️ Failed to destroy 'main' workspace"
+
+  echo "🧨 Destroying infrastructure in 'bootstrap'..."
+  cd "$BOOTSTRAP_DIR"
+  terraform init -input=false
+  terraform workspace select "$WORKSPACE" || terraform workspace new "$WORKSPACE"
+  terraform destroy -auto-approve || echo "⚠️ Failed to destroy 'bootstrap' workspace"
+
+  echo "✅ Cleanup completed."
+}
+
+# Main Deployment
+echo "📦 Moving to main folder"
+cd "$MAIN_DIR"
+
 echo "🚀 Initializing Terraform in main folder"
 terraform init
 
-# Create workspace if it doesn't exist
 if terraform workspace list | grep -qw "$WORKSPACE"; then
     echo "✅ Workspace '$WORKSPACE' already exists"
 else
@@ -23,20 +57,16 @@ else
     terraform workspace new "$WORKSPACE"
 fi
 
-# Select the workspace
 echo "📌 Selecting workspace: $WORKSPACE"
 terraform workspace select "$WORKSPACE"
 
-# Validate configuration
 echo "🔍 Validating Terraform Configuration..."
 terraform validate
 
-# Plan changes
 echo "📄 Planning Terraform changes..."
-terraform plan -out=tfplan
+terraform plan
 
-# Apply changes
 echo "🚀 Applying Terraform changes..."
-terraform apply -auto-approve tfplan
+terraform apply -auto-approve
 
 echo "✅ Terraform apply completed successfully in '$WORKSPACE' workspace."
