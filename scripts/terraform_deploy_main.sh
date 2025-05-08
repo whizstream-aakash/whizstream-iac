@@ -8,9 +8,9 @@ trap 'handle_cancel' SIGINT SIGTERM
 WORKSPACE="${1:-dev}"
 
 # Absolute paths
-MAIN_DIR="$(cd "$(pwd)/main" && pwd)"
-echo "$MAIN_DIR"
-BOOTSTRAP_DIR="$(cd "$(pwd)/bootstrap" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MAIN_DIR="$(cd "$SCRIPT_DIR/../../main" && pwd)"
+BOOTSTRAP_DIR="$(cd "$SCRIPT_DIR/../bootstrap" && pwd)"
 
 # Error handling function
 handle_error() {
@@ -45,6 +45,7 @@ destroy_infra() {
 
 # Main Deploymentscripts/terraform_deploy_main.sh
 echo "📦 Moving to main folder: $MAIN_DIR"
+echo "$MAIN_DIR"
 cd "$MAIN_DIR"
 
 echo "🚀 Initializing Terraform in main folder"
