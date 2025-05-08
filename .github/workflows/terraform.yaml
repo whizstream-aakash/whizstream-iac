@@ -24,10 +24,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1 # change if you're using another region
 
-      - name: 🚀 Run Terraform BootStrap Script
-        run: |
-          chmod +x ./scripts/terraform_deploy_bootstrap.sh
-          ./scripts/terraform_deploy_bootstrap.sh
+      # - name: 🚀 Run Terraform BootStrap Script
+      #   run: |
+      #     chmod +x ./scripts/terraform_deploy_bootstrap.sh
+      #     ./scripts/terraform_deploy_bootstrap.sh
 
       - name: 🚀 Run Terraform Main Script
         run: |
