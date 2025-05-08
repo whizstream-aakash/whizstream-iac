@@ -9,8 +9,10 @@ WORKSPACE="${1:-dev}"
 
 # Absolute paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MAIN_DIR="$(cd "$SCRIPT_DIR/../../main" && pwd)"
-BOOTSTRAP_DIR="$(cd "$SCRIPT_DIR/../bootstrap" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+MAIN_DIR="$REPO_ROOT/main"
+BOOTSTRAP_DIR="$REPO_ROOT/bootstrap"
+
 
 # Error handling function
 handle_error() {
