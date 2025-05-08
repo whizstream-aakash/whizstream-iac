@@ -8,10 +8,9 @@ trap 'handle_cancel' SIGINT SIGTERM
 WORKSPACE="${1:-dev}"
 
 # Absolute paths
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "$(pwd)"
-MAIN_DIR="$(cd "$(pwd)/main")"
-BOOTSTRAP_DIR="$(cd "$(pwd)/bootstrap")"
+MAIN_DIR="$(cd "$(pwd)/main" && pwd)"
+echo "$MAIN_DIR"
+BOOTSTRAP_DIR="$(cd "$(pwd)/bootstrap" && pwd)"
 
 # Error handling function
 handle_error() {
