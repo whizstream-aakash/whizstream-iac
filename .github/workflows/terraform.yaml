@@ -12,6 +12,9 @@ jobs:
     name: Apply Terraform
     runs-on: ubuntu-latest
 
+    env:
+      TF_IN_AUTOMATION: true
+
     steps:
       - name: 📦 Checkout Repository
         uses: actions/checkout@v3
@@ -27,6 +30,15 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.6.6
+
+      - name: ⚡ Cache Terraform plugins
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.terraform.d/plugin-cache
+            .terraform
+          key: terraform-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
+          restore-keys: terraform-${{ runner.os }}-
 
       - name: 🚀 Run Terraform BootStrap Script
         run: |
