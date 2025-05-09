@@ -8,7 +8,6 @@ trap 'handle_cancel' SIGINT SIGTERM
 WORKSPACE="${1:-dev}"
 
 # Absolute paths
-cd ..
 MAIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/main"
 BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/bootstrap"
 echo "DEBUG: MAIN_DIR resolved to: $MAIN_DIR"
