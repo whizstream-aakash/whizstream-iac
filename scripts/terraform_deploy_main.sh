@@ -6,11 +6,17 @@ trap 'handle_cancel' SIGINT SIGTERM
 
 # Accept workspace name as a parameter, default to "dev"
 WORKSPACE="${1:-dev}"
+
 # Absolute paths
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "DEBUG: SCRIPT_DIR resolved to: $SCRIPT_DIR"
 
-REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Adjust REPO_ROOT to remove the extra directory level
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+if [[ "$(basename "$REPO_ROOT")" == "whizstream-iac" ]]; then
+  REPO_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+fi
 echo "DEBUG: REPO_ROOT resolved to: $REPO_ROOT"
 
 MAIN_DIR="$REPO_ROOT/main"
