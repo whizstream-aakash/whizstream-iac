@@ -62,7 +62,6 @@ terraform validate
 
 echo "📄 Planning Terraform changes..."
 terraform plan 
-terraform show tfplan
 
 echo "🚀 Applying Terraform changes..."
 terraform apply -auto-approve
