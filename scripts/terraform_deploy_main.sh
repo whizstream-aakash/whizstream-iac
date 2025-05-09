@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -x
 set -euo pipefail
 trap 'handle_error $LINENO' ERR
 trap 'handle_cancel' SIGINT SIGTERM
@@ -10,8 +11,7 @@ WORKSPACE="${1:-dev}"
 # Absolute paths
 MAIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/main"
 BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/bootstrap"
-echo "DEBUG: MAIN_DIR resolved to: $MAIN_DIR"
-echo "DEBUG: BOOTSTRAP_DIR resolved to: $BOOTSTRAP_DIR"
+
 
 # Error handling function
 handle_error() {
@@ -31,15 +31,12 @@ handle_cancel() {
 destroy_infra() {
   echo "🧨 Destroying infrastructure in 'main/($WORKSPACE)'..."
   cd "$MAIN_DIR"
-  terraform init -input=false
-  terraform workspace select "$WORKSPACE" || terraform workspace new "$WORKSPACE"
   terraform destroy -auto-approve || echo "⚠️ Failed to destroy '$WORKSPACE' workspace"
 
   echo "🧨 Destroying infrastructure in 'bootstrap/($WORKSPACE)'..."
   cd "$BOOTSTRAP_DIR"
-  terraform init -input=false
-  terraform workspace select "$WORKSPACE" || terraform workspace new "$WORKSPACE"
   terraform destroy -auto-approve || echo "⚠️ Failed to destroy 'bootstrap' workspace"
+
   echo "✅ Cleanup completed."
 }
 
