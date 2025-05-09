@@ -48,7 +48,7 @@ echo "🚀 Initializing Terraform in main folder"
 terraform init
 
 # Ensure workspace exists or create it
-if terraform workspace list | grep -qw "$WORKSPACE"; then
+if terraform workspace list | grep "$WORKSPACE"; then
     echo "✅ Workspace '$WORKSPACE' already exists"
 else
     echo "📁 Creating workspace '$WORKSPACE'"
