@@ -39,4 +39,4 @@ jobs:
       - name: 🚀 Run Terraform Main Script
         run: |
           chmod +x ./scripts/terraform_deploy_main.sh
-          ./scripts/terraform_deploy_main.sh ${{ github.ref_name }}
+          ./scripts/terraform_deploy_main.sh ${{ github.head_ref }}
