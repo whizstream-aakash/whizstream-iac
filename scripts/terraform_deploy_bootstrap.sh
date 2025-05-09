@@ -16,14 +16,14 @@ BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/bootstrap"
 handle_error() {
   echo "❌ Error at line $1. Initiating cleanup..." >&2
   destroy_infra
-  exit 1
+#   exit 1
 }
 
 # Cancellation handling
 handle_cancel() {
   echo "🛑 Workflow was canceled. Initiating cleanup..."
   destroy_infra
-  exit 1
+#   exit 1
 }
 
 # Destroy function (destroys in reverse order: main → bootstrap)
