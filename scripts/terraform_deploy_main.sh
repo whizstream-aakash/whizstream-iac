@@ -41,7 +41,7 @@ destroy_infra() {
 }
 
 # Absolute paths
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MAIN_DIR="$REPO_ROOT/main"
 BOOTSTRAP_DIR="$REPO_ROOT/bootstrap"
 
