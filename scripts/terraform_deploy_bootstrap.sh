@@ -35,11 +35,13 @@ destroy_infra() {
   echo "✅ Cleanup completed."
 }
 
+
 # Debug: Print the workspace variable
 echo "Workspace: $WORKSPACE"
 
 # Check if the workspace is 'dev'
 if [ "$WORKSPACE" == "dev" ]; then  # Correct syntax with spaces around '=='
+
     # Get the absolute path to the directory containing this script
     echo "📦 Moving to bootstrap folder"
     cd "$BOOTSTRAP_DIR"
@@ -56,4 +58,5 @@ if [ "$WORKSPACE" == "dev" ]; then  # Correct syntax with spaces around '=='
     terraform apply -auto-approve
 else
     echo "Not in 'dev' workspace. Skipping Terraform commands."
-fi
+fi  
+
