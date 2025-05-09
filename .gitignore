@@ -18,3 +18,5 @@
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+/scripts/destroy_terraform.sh
