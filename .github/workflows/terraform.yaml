@@ -34,9 +34,9 @@ jobs:
       - name: 🚀 Run Terraform BootStrap Script
         run: |
           chmod +x ./scripts/terraform_deploy_bootstrap.sh
-          ./scripts/terraform_deploy_bootstrap.sh
+          ./scripts/terraform_deploy_bootstrap.sh ${{ github.ref_name  }}
 
       - name: 🚀 Run Terraform Main Script
         run: |
           chmod +x ./scripts/terraform_deploy_main.sh
-          ./scripts/terraform_deploy_main.sh ${{ github.head_ref }}
+          ./scripts/terraform_deploy_main.sh ${{ github.ref_name  }}
