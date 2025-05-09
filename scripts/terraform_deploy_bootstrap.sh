@@ -35,7 +35,7 @@ destroy_infra() {
   echo "✅ Cleanup completed."
 }
 
-
+echo "Workspace: "$WORKSPACE" "
 if ["$WORKSPACE" == "dev"]; then
     # Get the absolute path to the directory containing this script
     echo "📦 Moving to bootstrap folder"
