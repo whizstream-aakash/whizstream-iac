@@ -12,7 +12,7 @@ message_retention_seconds = 864000
 receive_wait_time_seconds = 20
 
 #security_groups
-name = "security_group_sqs_polling"
+security_group_name = "security_group_sqs_polling"
 description = "Security Group for SQS polling"
 ingress_rules = [
   {

@@ -1,4 +1,4 @@
-variable "name" {}
+variable "security_group_name" {}
 variable "description" {}
 
 //ingress

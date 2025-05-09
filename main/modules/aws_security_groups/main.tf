@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "sg_grp" {
-  name        = var.name
+  name        = var.security_group_name
   description = var.description
   
    dynamic "ingress" {
