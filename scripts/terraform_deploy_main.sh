@@ -6,9 +6,18 @@ trap 'handle_cancel' SIGINT SIGTERM
 
 # Accept workspace name as a parameter, default to "dev"
 WORKSPACE="${1:-dev}"
-
+# Absolute paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "DEBUG: SCRIPT_DIR resolved to: $SCRIPT_DIR"
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+echo "DEBUG: REPO_ROOT resolved to: $REPO_ROOT"
+
+MAIN_DIR="$REPO_ROOT/main"
+echo "DEBUG: MAIN_DIR resolved to: $MAIN_DIR"
+
+BOOTSTRAP_DIR="$REPO_ROOT/bootstrap"
+echo "DEBUG: BOOTSTRAP_DIR resolved to: $BOOTSTRAP_DIR"
 
 # Error handling function
 handle_error() {
@@ -39,11 +48,6 @@ destroy_infra() {
   terraform destroy -auto-approve || echo "⚠️ Failed to destroy 'bootstrap' workspace"
   echo "✅ Cleanup completed."
 }
-
-# Absolute paths
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-MAIN_DIR="$REPO_ROOT/main"
-BOOTSTRAP_DIR="$REPO_ROOT/bootstrap"
 
 # Main Deploymentscripts/terraform_deploy_main.sh
 echo "📦 Moving to main folder: $MAIN_DIR"
