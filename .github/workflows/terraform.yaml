@@ -31,10 +31,27 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: 🚀 Run Terraform BootStrap Script
+      - name: ⚙️ Check and Run Terraform BootStrap Script
         run: |
-          chmod +x ./scripts/terraform_deploy_bootstrap.sh
-          ./scripts/terraform_deploy_bootstrap.sh ${{ github.ref_name }}
+          BUCKET_NAME="my-terraform-remote-state-bucket-aakash0912"
+          TABLE_NAME="terraform-locks"
+          REGION="us-east-1"
+      
+          bucket_exists=$(aws s3api head-bucket --bucket "$BUCKET_NAME" 2>/dev/null && echo true || echo false)
+          table_exists=$(aws dynamodb describe-table --table-name "$TABLE_NAME" --region "$REGION" 2>/dev/null && echo true || echo false)
+      
+          if [ "$bucket_exists" = false ] || [ "$table_exists" = false ]; then
+            echo "S3 bucket or DynamoDB table missing. Running bootstrap..."
+            chmod +x ./scripts/terraform_deploy_bootstrap.sh
+            ./scripts/terraform_deploy_bootstrap.sh ${{ github.ref_name }}
+          else
+            echo "S3 bucket and DynamoDB table already exist. Skipping bootstrap."
+          fi
+
+      # - name: 🚀 Run Terraform BootStrap Script
+      #   run: |
+      #     chmod +x ./scripts/terraform_deploy_bootstrap.sh
+      #     ./scripts/terraform_deploy_bootstrap.sh ${{ github.ref_name }}
 
       - name: 🚀 Run Terraform Main Script
         run: |
