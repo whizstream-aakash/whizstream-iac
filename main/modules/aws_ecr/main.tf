@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "sqs_processor_repo" {
+resource "aws_ecr_repository" "whizstream_processor_repository" {
   name = var.name
 
   image_scanning_configuration {

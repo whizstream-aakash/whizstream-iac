@@ -61,3 +61,13 @@ variable "key_value"{}
 //ecr
 variable repository_names {}
 
+
+//ecs
+variable ecs_cluster_name{
+    type = string
+}
+
+//ecs task definition
+variable task_family_name {}
+variable container_name {}
+variable image_url {}

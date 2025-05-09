@@ -6,6 +6,9 @@ locals {
   output_bucket_name  = "${var.output_bucket_name}-${local.environment}"
   queue_name          = "${var.queue_name}-${local.environment}"
   security_group_name = "${var.security_group_name}-${local.environment}"
+  ecs_cluster_name = "${var.ecs_cluster_name}-${local.environment}"
+  task_family_name = "${var.task_family_name}-${local.environment}"
+  container_name = "${var.container_name}-${local.environment}"
 }
 
 module "aws_s3_bucket_upload_videos" {
@@ -70,6 +73,22 @@ module "aws_ecr_repository" {
   source = "./modules/aws_ecr"
   for_each = toset(var.repository_names)
   name = "${each.value}-${local.environment}"
+}
+
+module "aws_ecs_cluster"{
+  source = "./modules/aws_ecs"
+  ecs_cluster_name = local.ecs_cluster_name
+}
+
+module "aws_ecs_task_definition"{
+  source = "./modules/aws_ecs_task_definition"
+  task_family_name = local.task_family_name
+  container_name = local.container_name
+  image_url = var.image_url
+
+  depends_on = [
+    module.aws_ecr_repository
+  ]
 }
 
 module "security_group_sqs_polling" {
