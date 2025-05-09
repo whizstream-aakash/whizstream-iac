@@ -9,8 +9,7 @@ locals {
   ecs_cluster_name = "${var.ecs_cluster_name}-${local.environment}"
   task_family_name = "${var.task_family_name}-${local.environment}"
   container_name = "${var.container_name}-${local.environment}"
-
-  video_transcoder_repo_url = module.aws_ecr_repository["video-transcoder-${local.environment}"].repository_url
+  video_transcoder_repo_url = module.aws_ecr_repository["video-transcoder"].repository_url
 }
 
 module "aws_s3_bucket_upload_videos" {
