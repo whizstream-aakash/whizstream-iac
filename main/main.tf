@@ -5,6 +5,7 @@ locals {
   upload_bucket_name  = "${var.upload_bucket_name}-${local.environment}"
   output_bucket_name  = "${var.output_bucket_name}-${local.environment}"
   queue_name          = "${var.queue_name}-${local.environment}"
+  security_group_name = "${var.security_group_name}-${local.environment}"
 }
 
 module "aws_s3_bucket_upload_videos" {
@@ -22,7 +23,7 @@ module "aws_s3_bucket_output_videos" {
 module "aws_sqs_queue_module" {
   source = "./modules/sqs_queue"
   aws_region = var.aws_region 
-  queue_name = var.queue_name
+  queue_name = local.queue_name
   delay_seconds = var.delay_seconds
   message_retention_seconds = var.message_retention_seconds
   receive_wait_time_seconds = var.receive_wait_time_seconds
@@ -68,12 +69,12 @@ resource "aws_s3_bucket_notification" "s3_to_sqs_notification" {
 module "aws_ecr_repository" {
   source = "./modules/aws_ecr"
   for_each = toset(var.repository_names)
-  name = each.value
+  name = "${each.value}-${local.environment}"
 }
 
 module "security_group_sqs_polling" {
   source = "./modules/aws_security_groups"
-  name=var.name
+  security_group_name=local.security_group_name
   description=var.description
   ingress_rules = var.ingress_rules
 }

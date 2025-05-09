@@ -41,7 +41,7 @@ variable "receive_wait_time_seconds"{
 }
 
 //security_groups
-variable "name" {}
+variable "security_group_name" {}
 variable "description" {}
 variable "ingress_rules" {
   description = "List of ingress rules"
