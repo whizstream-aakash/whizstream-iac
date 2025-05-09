@@ -17,7 +17,6 @@ handle_error() {
   exit 1
 }
 
-
 # Cancellation handling
 handle_cancel() {
   echo "🛑 Workflow was canceled. Initiating cleanup..."
