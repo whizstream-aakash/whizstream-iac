@@ -10,7 +10,7 @@ WORKSPACE="${1:-dev}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "DEBUG: SCRIPT_DIR resolved to: $SCRIPT_DIR"
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 echo "DEBUG: REPO_ROOT resolved to: $REPO_ROOT"
 
 MAIN_DIR="$REPO_ROOT/main"
