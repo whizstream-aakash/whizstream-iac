@@ -40,10 +40,10 @@ jobs:
           key: terraform-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
           restore-keys: terraform-${{ runner.os }}-
 
-      # - name: 🚀 Run Terraform BootStrap Script
-      #   run: |
-      #     chmod +x ./scripts/terraform_deploy_bootstrap.sh
-      #     ./scripts/terraform_deploy_bootstrap.sh
+      - name: 🚀 Run Terraform BootStrap Script
+        run: |
+          chmod +x ./scripts/terraform_deploy_bootstrap.sh
+          ./scripts/terraform_deploy_bootstrap.sh
 
       - name: 🚀 Run Terraform Main Script
         run: |
