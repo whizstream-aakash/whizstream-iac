@@ -85,7 +85,7 @@ module "aws_ecs_task_definition"{
   source = "./modules/aws_ecs_task_definition"
   task_family_name = local.task_family_name
   container_name = local.container_name
-  image_uri = var.image_uri != null ? var.image_uri : local.video_transcoder_repo_url
+  image_uri = "video-transcoder-${local.environment}"
   depends_on = [
     module.aws_ecr_repository
   ]
