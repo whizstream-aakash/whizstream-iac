@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 set -euo pipefail
 trap 'handle_error $LINENO' ERR
 trap 'handle_cancel' SIGINT SIGTERM
