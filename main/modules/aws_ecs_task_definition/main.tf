@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
 [
   {
     "name": "${var.container_name}",
-    "image": "${var.image_url}",
+    "image": "${var.image_uri}",
     "cpu": 1024,
     "memory": 2048,
     "essential": true

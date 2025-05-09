@@ -9,6 +9,12 @@ locals {
   ecs_cluster_name = "${var.ecs_cluster_name}-${local.environment}"
   task_family_name = "${var.task_family_name}-${local.environment}"
   container_name = "${var.container_name}-${local.environment}"
+
+  # Filter for the repository that contains "video-transcoder" in its name
+  video_transcoder_repo = {
+    for repo_name, repo in module.aws_ecr_repository : 
+    repo_name => repo.repository_url if contains(repo_name, "video-transcoder")
+  }
 }
 
 module "aws_s3_bucket_upload_videos" {
@@ -84,7 +90,7 @@ module "aws_ecs_task_definition"{
   source = "./modules/aws_ecs_task_definition"
   task_family_name = local.task_family_name
   container_name = local.container_name
-  image_url = var.image_url
+  image_uri = var.image_uri != null ? var.image_uri : local.video_transcoder_repo["video-transcoder-${local.environment}"]
 
   depends_on = [
     module.aws_ecr_repository

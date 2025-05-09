@@ -70,4 +70,4 @@ variable ecs_cluster_name{
 //ecs task definition
 variable task_family_name {}
 variable container_name {}
-variable image_url {}
+variable image_uri {}
