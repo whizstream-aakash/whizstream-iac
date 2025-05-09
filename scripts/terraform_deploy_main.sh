@@ -33,7 +33,7 @@ destroy_infra() {
   cd "$MAIN_DIR"
   terraform destroy -auto-approve || echo "⚠️ Failed to destroy '$WORKSPACE' workspace"
 
-  echo "🧨 Destroying infrastructure in 'bootstrap/($WORKSPACE)'..."
+  echo "🧨 Destroying infrastructure in 'bootstrap/'..."
   cd "$BOOTSTRAP_DIR"
   terraform destroy -auto-approve || echo "⚠️ Failed to destroy 'bootstrap' workspace"
 
