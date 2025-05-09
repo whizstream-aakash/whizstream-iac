@@ -8,10 +8,11 @@ trap 'handle_cancel' SIGINT SIGTERM
 WORKSPACE="${1:-dev}"
 
 # Absolute paths
-MAIN_DIR="/home/runner/work/whizstream-iac/main"
+cd ..
+MAIN_DIR="$(pwd)/main"
 echo "DEBUG: MAIN_DIR resolved to: $MAIN_DIR"
 
-BOOTSTRAP_DIR="/home/runner/work/whizstream-iac/bootstrap"
+BOOTSTRAP_DIR="$(pwd)/bootstrap"
 echo "DEBUG: BOOTSTRAP_DIR resolved to: $BOOTSTRAP_DIR"
 
 # Error handling function
@@ -46,7 +47,6 @@ destroy_infra() {
 
 # Main Deploymentscripts/terraform_deploy_main.sh
 echo "📦 Moving to main folder: $MAIN_DIR"
-echo "$MAIN_DIR"
 cd "$MAIN_DIR"
 
 echo "🚀 Initializing Terraform in main folder"
