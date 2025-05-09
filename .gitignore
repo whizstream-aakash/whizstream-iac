@@ -8,10 +8,6 @@
 # Ignore Terraform directories
 .terraform/
 
-# Ignore local environment files
-*.tfvars
-*.tfvars.json
-
 # Ignore log files
 *.log
 
