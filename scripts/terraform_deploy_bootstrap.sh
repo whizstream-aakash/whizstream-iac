@@ -35,17 +35,22 @@ destroy_infra() {
   echo "✅ Cleanup completed."
 }
 
-# Get the absolute path to the directory containing this script
-echo "📦 Moving to bootstrap folder"
-cd "$BOOTSTRAP_DIR"
 
-# Initialize Terraform (from the bootstrap folder)
-echo "Initializing Terraform in bootstrap folder"
-terraform init
+if ["$WORKSPACE" == "dev"]; then
+    # Get the absolute path to the directory containing this script
+    echo "📦 Moving to bootstrap folder"
+    cd "$BOOTSTRAP_DIR"
 
-# Plan and apply Terraform changes
-echo "Planning Terraform changes..."
-terraform plan
+    # Initialize Terraform (from the bootstrap folder)
+    echo "Initializing Terraform in bootstrap folder"
+    terraform init
 
-echo "Applying Terraform changes..."
-terraform apply -auto-approve
+    # Plan and apply Terraform changes
+    echo "Planning Terraform changes..."
+    terraform plan
+
+    echo "Applying Terraform changes..."
+    terraform apply -auto-approve`
+else
+    echo "Not in 'dev' workspace. Skipping Terraform commands."
+fi    
