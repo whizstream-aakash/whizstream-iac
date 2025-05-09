@@ -9,10 +9,9 @@ WORKSPACE="${1:-dev}"
 
 # Absolute paths
 cd ..
-MAIN_DIR="$(pwd)/main"
+MAIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/main"
+BOOTSTRAP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/bootstrap"
 echo "DEBUG: MAIN_DIR resolved to: $MAIN_DIR"
-
-BOOTSTRAP_DIR="$(pwd)/bootstrap"
 echo "DEBUG: BOOTSTRAP_DIR resolved to: $BOOTSTRAP_DIR"
 
 # Error handling function
