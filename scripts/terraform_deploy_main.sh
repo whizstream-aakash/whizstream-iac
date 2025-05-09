@@ -26,7 +26,7 @@ handle_cancel() {
   exit 1
 }
 
-# Destroy function (destroys in reverse order: main → bootstrap)
+# Destroy functionq
 destroy_infra() {
   echo "🧨 Destroying infrastructure in 'main/($WORKSPACE)'..."
   cd "$MAIN_DIR"
@@ -34,6 +34,7 @@ destroy_infra() {
 
   echo "🧨 Destroying infrastructure in 'bootstrap/'..."
   cd "$BOOTSTRAP_DIR"
+  terraform init
   terraform destroy -auto-approve || echo "⚠️ Failed to destroy 'bootstrap' workspace"
 
   echo "✅ Cleanup completed."
