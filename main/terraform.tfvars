@@ -51,3 +51,4 @@ ecs_cluster_name = "video-transcoder-cluster"
 
 #ecs_task_definition
 task_family_name = "video-transcoder-family"
+container_name = "video-transcoder-container"
