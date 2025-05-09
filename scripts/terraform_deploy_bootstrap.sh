@@ -50,7 +50,7 @@ if ["$WORKSPACE" == "dev"]; then
     terraform plan
 
     echo "Applying Terraform changes..."
-    terraform apply -auto-approve`
+    terraform apply -auto-approve
 else
     echo "Not in 'dev' workspace. Skipping Terraform commands."
 fi    
