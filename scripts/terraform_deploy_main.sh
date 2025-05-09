@@ -8,21 +8,10 @@ trap 'handle_cancel' SIGINT SIGTERM
 WORKSPACE="${1:-dev}"
 
 # Absolute paths
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "DEBUG: SCRIPT_DIR resolved to: $SCRIPT_DIR"
-
-# Adjust REPO_ROOT to remove the extra directory level
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-if [[ "$(basename "$REPO_ROOT")" == "whizstream-iac" ]]; then
-  REPO_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
-fi
-echo "DEBUG: REPO_ROOT resolved to: $REPO_ROOT"
-
-MAIN_DIR="$REPO_ROOT/main"
+MAIN_DIR="/home/runner/work/whizstream-iac/main"
 echo "DEBUG: MAIN_DIR resolved to: $MAIN_DIR"
 
-BOOTSTRAP_DIR="$REPO_ROOT/bootstrap"
+BOOTSTRAP_DIR="/home/runner/work/whizstream-iac/bootstrap"
 echo "DEBUG: BOOTSTRAP_DIR resolved to: $BOOTSTRAP_DIR"
 
 # Error handling function
