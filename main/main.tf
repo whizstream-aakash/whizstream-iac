@@ -67,6 +67,8 @@ resource "aws_s3_bucket_notification" "s3_to_sqs_notification" {
 
   depends_on = [
     aws_sqs_queue_policy.s3_sqs_policy
+
+     
   ]
 }
 
@@ -76,33 +78,33 @@ module "aws_ecr_repository" {
   name = "${each.value}-${local.environment}"
 }
 
-module "aws_ecs_cluster"{
-  source = "./modules/aws_ecs"
-  ecs_cluster_name = local.ecs_cluster_name
-}
+# module "aws_ecs_cluster"{
+#   source = "./modules/aws_ecs"
+#   ecs_cluster_name = local.ecs_cluster_name
+# }
 
-module "aws_ecs_task_definition"{
-  source = "./modules/aws_ecs_task_definition"
-  task_family_name = local.task_family_name
-  container_name = local.container_name
-  image_uri = "video-transcoder-${local.environment}"
-  depends_on = [
-    module.aws_ecr_repository
-  ]
-}
+# module "aws_ecs_task_definition"{
+#   source = "./modules/aws_ecs_task_definition"
+#   task_family_name = local.task_family_name
+#   container_name = local.container_name
+#   image_uri = "video-transcoder-${local.environment}"
+#   depends_on = [
+#     module.aws_ecr_repository
+#   ]
+# }
 
-module "security_group_sqs_polling" {
-  source = "./modules/aws_security_groups"
-  security_group_name=local.security_group_name
-  description=var.description
-  ingress_rules = var.ingress_rules
-}
+# module "security_group_sqs_polling" {
+#   source = "./modules/aws_security_groups"
+#   security_group_name=local.security_group_name
+#   description=var.description
+#   ingress_rules = var.ingress_rules
+# }
 
-module "ec2_instance" {
-  source = "./modules/aws_ec2"
-  ami_value = var.ami_value
-  instance_type_value = var.instance_type_value
-  key_value = var.key_value
-  # security_group_id = module.security_group_sqs_polling.security_group_id
-}
+# module "ec2_instance" {
+#   source = "./modules/aws_ec2"
+#   ami_value = var.ami_value
+#   instance_type_value = var.instance_type_value
+#   key_value = var.key_value
+#   # security_group_id = module.security_group_sqs_polling.security_group_id
+# }
 
