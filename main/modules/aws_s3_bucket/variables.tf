@@ -7,3 +7,20 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "This is upload videos bucket name"
 }
+
+variable "enable_bucket_policy" {
+  description = "Whether to create the S3 bucket policy"
+  type        = bool
+  default     = false
+}
+
+variable "actions" {
+  description = "List of allowed actions in the bucket policy"
+  type        = list(string)
+}
+
+variable "principals" {
+  description = "List of AWS principals allowed access"
+  type        = list(string)
+  default     = []
+}

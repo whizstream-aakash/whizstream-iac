@@ -14,6 +14,39 @@ variable "output_bucket_name" {
   description = "Name of the output S3 bucket"
 }
 
+variable "upload_bucket_enable_bucket_policy" {
+  description = "Whether to create the S3 bucket policy"
+  type        = bool
+  default     = false
+}
+
+variable "upload_bucket_actions" {
+  description = "List of allowed actions in the bucket policy"
+  type        = list(string)
+}
+
+variable "upload_bucket_principals" {
+  description = "List of AWS principals allowed access"
+  type        = list(string)
+  default     = []
+}
+
+variable "output_bucket_enable_bucket_policy" {
+  description = "Whether to create the S3 bucket policy"
+  type        = bool
+  default     = false
+}
+
+variable "output_bucket_actions" {
+  description = "List of allowed actions in the bucket policy"
+  type        = list(string)
+}
+
+variable "output_bucket_principals" {
+  description = "List of AWS principals allowed access"
+  type        = list(string)
+  default     = []
+}
 
 //queue
 variable "queue_name" {

@@ -1,9 +1,18 @@
 #main/modules/terraform.tfvars
 
 #S3 Bucket
-aws_region="us-east-1"
-upload_bucket_name = "whizstream-upload-videos"
-output_bucket_name = "whizstream-output-videos"
+aws_region                     = "us-east-1"
+
+upload_bucket_name            = "whizstream-upload-videos"
+upload_bucket_enable_bucket_policy = false
+upload_bucket_actions         = [ "s3:GetObject", "s3:ListBucket" ]
+upload_bucket_principals      = ["*"]
+
+output_bucket_name            = "whizstream-output-videos"
+output_bucket_enable_bucket_policy = true
+output_bucket_actions         = [ "s3:GetObject", "s3:ListBucket" ]
+output_bucket_principals      = ["*"]
+
 
 #SQS Queue
 queue_name = "whizstream-upload-video-queue"

@@ -19,4 +19,4 @@
 .DS_Store
 Thumbs.db
 
-/scripts/destroy_terraform.sh
+./main/destroy_terraform.sh

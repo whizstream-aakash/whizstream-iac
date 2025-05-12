@@ -16,12 +16,18 @@ module "aws_s3_bucket_upload_videos" {
   source = "./modules/aws_s3_bucket"
   bucket_name = local.upload_bucket_name
   aws_region = var.aws_region
+  enable_bucket_policy = var.upload_bucket_enable_bucket_policy
+  principals = var.upload_bucket_principals
+  actions = var.upload_bucket_actions
 }
 
 module "aws_s3_bucket_output_videos" {
   source = "./modules/aws_s3_bucket"
   bucket_name = local.output_bucket_name
   aws_region = var.aws_region
+  enable_bucket_policy = var.output_bucket_enable_bucket_policy
+  principals = var.output_bucket_principals
+  actions = var.output_bucket_actions
 }
 
 module "aws_sqs_queue_module" {
@@ -67,8 +73,6 @@ resource "aws_s3_bucket_notification" "s3_to_sqs_notification" {
 
   depends_on = [
     aws_sqs_queue_policy.s3_sqs_policy
-
-     
   ]
 }
 
