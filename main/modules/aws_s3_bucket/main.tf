@@ -24,6 +24,8 @@ resource "aws_s3_bucket_public_access_block" "example" {
     count  = var.enable_bucket_policy ? 1 : 0
     bucket = aws_s3_bucket.example.id
     policy = data.aws_iam_policy_document.s3_policy[0].json
+
+    depends_on = [aws_s3_bucket_public_access_block.example]
  }
 
  data "aws_iam_policy_document" "s3_policy" {
