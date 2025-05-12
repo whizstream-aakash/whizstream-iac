@@ -5,10 +5,12 @@ aws_region                     = "us-east-1"
 
 upload_bucket_name            = "whizstream-upload-videos"
 upload_bucket_enable_bucket_policy = false
+upload_bucket_enable_public_access_block = false
 upload_bucket_actions         = [ "s3:GetObject", "s3:ListBucket" ]
 upload_bucket_principals      = ["*"]
 
 output_bucket_name            = "whizstream-output-videos"
+output_bucket_enable_public_access_block = true
 output_bucket_enable_bucket_policy = true
 output_bucket_actions         = [ "s3:GetObject", "s3:ListBucket" ]
 output_bucket_principals      = ["*"]

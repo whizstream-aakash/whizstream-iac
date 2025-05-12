@@ -9,6 +9,17 @@ resource "aws_s3_bucket" "example" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket_public_access_block" "example" {
+  count = var.enable_public_access_block ? 1 : 0
+
+  bucket = aws_s3_bucket.example.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
  resource "aws_s3_bucket_policy" "example_policy"  {
     count  = var.enable_bucket_policy ? 1 : 0
     bucket = aws_s3_bucket.example.id

@@ -10,8 +10,10 @@ variable "upload_bucket_name" {
   description = "Name of the upload S3 bucket"
 }
 
-variable "output_bucket_name" {
-  description = "Name of the output S3 bucket"
+variable "upload_bucket_enable_public_access_block" {
+  description = "Whether to disable S3 Block Public Access restrictions"
+  type        = bool
+  default     = false
 }
 
 variable "upload_bucket_enable_bucket_policy" {
@@ -31,8 +33,18 @@ variable "upload_bucket_principals" {
   default     = []
 }
 
+variable "output_bucket_name" {
+  description = "Name of the output S3 bucket"
+}
+
 variable "output_bucket_enable_bucket_policy" {
   description = "Whether to create the S3 bucket policy"
+  type        = bool
+  default     = false
+}
+
+variable "output_bucket_enable_public_access_block" {
+  description = "Whether to disable S3 Block Public Access restrictions"
   type        = bool
   default     = false
 }
