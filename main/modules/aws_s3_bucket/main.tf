@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "example" {
  resource "aws_s3_bucket_policy" "example_policy"  {
     count  = var.enable_bucket_policy ? 1 : 0
     bucket = aws_s3_bucket.example.id
-    policy = data.aws_iam_policy_document.s3_policy.json
+    policy = data.aws_iam_policy_document.s3_policy[0].json
  }
 
  data "aws_iam_policy_document" "s3_policy" {
