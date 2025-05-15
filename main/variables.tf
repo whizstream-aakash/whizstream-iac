@@ -7,11 +7,6 @@ variable "aws_region" {
 
 //s3
 
-variable "upload_bucket_enable_cors" {
-  type    = bool
-  default = true
-}
-
 variable "upload_bucket_name" {
   description = "Name of the upload S3 bucket"
 }
