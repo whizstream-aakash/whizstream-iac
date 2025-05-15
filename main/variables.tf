@@ -6,6 +6,12 @@ variable "aws_region" {
 
 
 //s3
+
+variable "upload_bucket_enable_cors" {
+  type    = bool
+  default = true
+}
+
 variable "upload_bucket_name" {
   description = "Name of the upload S3 bucket"
 }
@@ -33,6 +39,11 @@ variable "upload_bucket_principals" {
   default     = []
 }
 
+variable "upload_bucket_enable_cors" {
+  type    = bool
+  default = false
+}
+
 variable "output_bucket_name" {
   description = "Name of the output S3 bucket"
 }
@@ -58,6 +69,11 @@ variable "output_bucket_principals" {
   description = "List of AWS principals allowed access"
   type        = list(string)
   default     = []
+}
+
+variable "output_bucket_enable_cors" {
+  type    = bool
+  default = false
 }
 
 //queue

@@ -19,6 +19,7 @@ module "aws_s3_bucket_upload_videos" {
   enable_bucket_policy = var.upload_bucket_enable_bucket_policy
   principals = var.upload_bucket_principals
   actions = var.upload_bucket_actions
+  enable_cors = var.upload_bucket_enable_cors
   enable_public_access_block = var.upload_bucket_enable_public_access_block
 }
 
@@ -26,6 +27,7 @@ module "aws_s3_bucket_output_videos" {
   source = "./modules/aws_s3_bucket"
   bucket_name = local.output_bucket_name
   aws_region = var.aws_region
+  enable_cors = var.output_bucket_enable_cors
   enable_bucket_policy = var.output_bucket_enable_bucket_policy
   principals = var.output_bucket_principals
   actions = var.output_bucket_actions

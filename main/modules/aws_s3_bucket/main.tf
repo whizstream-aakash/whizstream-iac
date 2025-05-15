@@ -51,3 +51,18 @@ resource "aws_s3_bucket_versioning" "versioning" {
 }
 
 
+resource "aws_s3_bucket_cors_configuration" "example_cors" {
+  count  = var.enable_cors ? 1 : 0
+  bucket = aws_s3_bucket.example.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD"]
+    allowed_origins = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
+
+    depends_on = [aws_s3_bucket_public_access_block.example]
+}
+

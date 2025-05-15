@@ -8,6 +8,11 @@ variable "bucket_name" {
   description = "This is upload videos bucket name"
 }
 
+variable "enable_cors" {
+  type    = bool
+  default = true
+}
+
 variable "enable_public_access_block" {
   description = "Whether to disable S3 Block Public Access restrictions"
   type        = bool
