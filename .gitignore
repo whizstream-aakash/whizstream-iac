@@ -8,6 +8,8 @@
 # Ignore Terraform directories
 .terraform/
 
+.whizstream-kubernetes
+
 # Ignore log files
 *.log
 

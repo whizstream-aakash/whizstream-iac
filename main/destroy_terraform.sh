@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -x
+
 terraform init
 
 terraform workspace select dev
 
-terraform destroy
+terraform destroy -auto-approve
